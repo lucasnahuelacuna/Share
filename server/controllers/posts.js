@@ -2,7 +2,7 @@ const PostMessages = require('../models/postMessages')
 
 const getPosts = async (req, res) => {
     try {
-        const postMessages = await PostMessage.find()
+        const postMessages = await PostMessages.find()
         res.status(200).json(postMessages)
     } catch (error) {
         res.status(404).json({ message: error.message })
@@ -11,7 +11,7 @@ const getPosts = async (req, res) => {
 
 const createPost = async (req, res) => {
     const post = req.body
-    const newPost = new PostMessage(post)
+    const newPost = new PostMessages(post)
 
     try {
         await newPost.save()
