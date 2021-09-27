@@ -4,6 +4,7 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 const dotenv = require('dotenv')
 const postRoutes = require('./routes/posts')
+const userRoutes = require('./routes/users')
 
 const app = express()
 
@@ -13,6 +14,7 @@ app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))
 app.use(express.json())
 app.use(cors())
 app.use('/posts', postRoutes)
+app.use('/user', userRoutes)
 
 dotenv.config()
 
