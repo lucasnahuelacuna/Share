@@ -12,7 +12,7 @@ const getPosts = async (req, res) => {
 
 const createPost = async (req, res) => {
     const post = req.body
-    const newPost = new PostMessages(post)
+    const newPost = new PostMessages({ ...post, creator: req.userId, createdAt: new Date().toISOString() })
 
     try {
         await newPost.save()
