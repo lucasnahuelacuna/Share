@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { Link, useHistory, useLocation } from 'react-router-dom'
 import { AppBar, Avatar, Typography, Button, Toolbar } from '@material-ui/core'
 import useStyles from './styles'
-import ShareImage from '../../images/ShareImage.png'
+import Logo from '../../images/Logo.png'
 import { useDispatch } from 'react-redux'
 import { LOGOUT } from '../../constants/actionTypes'
 import decode from 'jwt-decode'
+
 
 const Navbar = () => {
     const classes = useStyles()
@@ -36,10 +37,10 @@ const Navbar = () => {
 
     return (
         <AppBar className={classes.appBar} position="static" color="inherit">
-            <div className={classes.brandContainer}>
-                <Typography component={Link} to="/" className={classes.heading} variant="h2" align="center">Share</Typography>
-                <img className={classes.image} src={ShareImage} alt="Sharing" height="60" />
-            </div>
+            <Link to='/' className={classes.brandContainer}>
+                <Typography component={Link} to="/" className={classes.heading} variant="h4" align="center">SHARE</Typography>
+                <img className={classes.image} src={Logo} alt="Sharing" height="40" />
+            </Link>
             <Toolbar className={classes.toolbar}>
                 {user ? (
                     <div className={classes.profile}>
