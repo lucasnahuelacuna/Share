@@ -1,8 +1,9 @@
 const express = require('express')
 const router = express.Router()
-const { getPosts, getPostsBySearch, createPost, updatePost, deletePost, likePost } = require('../controllers/posts')
+const { getPost, getPosts, getPostsBySearch, createPost, updatePost, deletePost, likePost } = require('../controllers/posts')
 const auth = require('../middleware/auth')
 
+router.get('/:id', getPost)
 router.get('/', getPosts)
 router.get('/search', getPostsBySearch)
 router.post('/', auth, createPost)

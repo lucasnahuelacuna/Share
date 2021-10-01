@@ -1,6 +1,17 @@
 const mongoose = require('mongoose')
 const PostMessages = require('../models/postMessages')
 
+const getPost = async (req, res) => {
+    const { id } = req.params
+    
+    try {
+        const post = await PostMessages.findById(id)
+        res.status(200).json(post)
+    } catch (error) {
+        res.status(404).json({ message: error.message })
+    }
+}
+
 const getPosts = async (req, res) => {
     const { page } = req.query
 
@@ -94,6 +105,7 @@ const likePost = async (req, res) => {
 }
 
 module.exports = {
+    getPost,
     getPosts,
     getPostsBySearch,
     createPost,
