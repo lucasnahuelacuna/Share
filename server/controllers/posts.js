@@ -14,7 +14,6 @@ const getPost = async (req, res) => {
 
 const getPosts = async (req, res) => {
     const { page } = req.query
-
     try {
         const LIMIT = 8 //number of posts per page
         const startIndex = (Number(page) - 1) * LIMIT //get the starting index of every page
