@@ -4,9 +4,22 @@ export default makeStyles((theme) => ({
   media: {
     borderRadius: '20px',
     objectFit: 'cover',
-    width: '100%',
-    maxHeight: '600px',
-
+    width: '600px',
+    height: '500px',
+    display: 'block',
+    margin: 'auto',
+    [theme.breakpoints.down('md')]: {
+      width: '500px',
+      height: '400px',
+    },
+    [theme.breakpoints.down('sm')]: {
+      width: '450px',
+      height: '350px',
+    },
+    [theme.breakpoints.down('xs')]: {
+      width: '100%',
+      
+    },
   },
   card: {
     display: 'flex',
@@ -33,8 +46,43 @@ export default makeStyles((theme) => ({
       flexDirection: 'column',
     },
   },
+  recommendedPost: {
+    margin: '20px',
+    width: '250px',
+    cursor: 'pointer',
+    padding: '10px',
+    border: '1px solid #ccc',
+    borderRadius: '10px',
+    [theme.breakpoints.down('xs')]: {
+      width: '100%',
+      margin: '5px auto',
+      boxSizing: 'border-box'
+    },
+  },
+  recommendedPostImage: {
+    display: 'block',
+    width: '225px',
+    height: '132px',
+    margin: 'auto',
+    borderRadius: '5px',
+    objectFit: 'cover'
+  },
+  recommendedPostMessage: {
+    color: '#777',
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    display: "-webkit-box",
+    "-webkit-line-clamp": 2,
+    "-webkit-box-orient": "vertical",
+    height: '40px'
+  },
   loadingPaper: {
-    display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px', borderRadius: '15px', height: '39vh',
+    display: 'flex', 
+    justifyContent: 'center', 
+    alignItems: 'center', 
+    padding: '20px', 
+    borderRadius: '15px', 
+    height: '39vh',
   },
   commentsOuterContainer: {
     display: 'flex',
@@ -44,5 +92,10 @@ export default makeStyles((theme) => ({
     height: '200px',
     overflowY: 'auto',
     marginRight: '30px'
-  }
+  },
+  commentsTitle: {
+    [theme.breakpoints.down('xs')]: {
+      fontSize: '12px'
+    },
+  },
 }));

@@ -59,22 +59,25 @@ const Post = ({ post, setCurrentId }) => {
                 {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
                     <div className={classes.overlay2}>
                         <Button 
-                            style={{ color: 'white'}}
+                            style={{ color: 'white', zIndex: 100, position: 'relative' }}
                             size="small"
-                            onClick={() => setCurrentId(post._id)}
+                            onClick={() => {
+                                setCurrentId(post._id)
+                                console.log('Editing Post')
+                            }}
                         >
                             <MoreHorizIcon fontSize="medium" />
                         </Button>
                     </div>
                 )}
                 <div className={classes.details}>
-                    <Typography variant="body2" color="textSecondary">
+                    <Typography className={classes.tags} variant="body2" color="textSecondary" component="h2">
                         {post.tags.map(tag => `#${tag} `)}
                     </Typography>
                 </div>
-                <Typography className={classes.title} variant="h5" gutterBottom>{post.title}</Typography>
+                <Typography className={classes.title} variant="h5" gutterBottom component="h2">{post.title}</Typography>
                 <CardContent>
-                    <Typography variant="body2" color="textSecondary" component="p">{post.message}</Typography>
+                    <Typography className={classes.message} variant="body2" color="textSecondary" component="p">{post.message}</Typography>
                 </CardContent>
             </ButtonBase>
             <CardActions className={classes.cardActions}>
@@ -82,7 +85,7 @@ const Post = ({ post, setCurrentId }) => {
                     <Likes />
                 </Button>
                 {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
-                    <Button size="small" color="primary" onClick={() => dispatch(deletePost(post._id))}>
+                    <Button size="small" color="secondary" onClick={() => dispatch(deletePost(post._id))}>
                         <DeleteIcon fontSize="small" />
                         Delete
                     </Button>

@@ -14,9 +14,15 @@ export default makeStyles((theme) => ({
   heading: {
     color: '#555',
     textDecoration: 'none',
+    [theme.breakpoints.down('xs')]: {
+      fontSize: '24px'
+    },
   },
   image: {
     marginLeft: '15px',
+    [theme.breakpoints.down('xs')]: {
+      height: '30px'
+    },
   },
   toolbar: {
     display: 'flex',
@@ -25,12 +31,21 @@ export default makeStyles((theme) => ({
   },
   profile: {
     display: 'flex',
-    justifyContent: 'space-between',
-    width: '400px',
+    [theme.breakpoints.down('xs')]: {
+      display: 'block',
+      with: 'auto'
+    },
   },
   userName: {
     display: 'flex',
     alignItems: 'center',
+    margin: '0 50px',
+    [theme.breakpoints.down('md')]: {
+      margin: '0 40px',
+    },
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
   },
   brandContainer: {
     display: 'flex',
@@ -40,5 +55,22 @@ export default makeStyles((theme) => ({
   purple: {
     color: theme.palette.getContrastText(deepPurple[500]),
     backgroundColor: deepPurple[500],
+    [theme.breakpoints.down('sm')]: {
+      marginRight: '50px',
+    },
+    [theme.breakpoints.down('xs')]: {
+      display: 'none',
+    },
   },
+  logout: {
+    [theme.breakpoints.down('xs')]: {
+      fontSize: '12px'
+    },
+  },
+  signin: {
+    [theme.breakpoints.down('xs')]: {
+      fontSize: '12px',
+      whiteSpace: 'nowrap'
+    },
+  }
 }));

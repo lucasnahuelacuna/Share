@@ -37,12 +37,27 @@ export default makeStyles({
     display: 'flex',
   },
   details: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    margin: '20px',
+    width: '90%',
+    margin: ' 20px auto',
+  },
+  tags: {
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
   },
   title: {
     padding: '0 16px',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+  },
+  message: {
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    display: "-webkit-box",
+    "-webkit-line-clamp": 2,
+    "-webkit-box-orient": "vertical",
+    height: '40px'
   },
   cardActions: {
     padding: '0 16px 8px 16px',
@@ -52,5 +67,7 @@ export default makeStyles({
   cardAction: {
     display: 'block',
     textAlign: 'initial',
+    position: 'relative',
+    zIndex: 0,
   },
 });
