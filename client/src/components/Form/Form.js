@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import useStyles from './styles'
-import { TextField, Button, Typography, Paper } from '@material-ui/core'
-import FileBase from 'react-file-base64'
+import { TextField, Button, Typography, Paper, ImageList } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
 import { createPost, updatePost } from '../../actions/posts'
 import { useHistory } from 'react-router-dom'
+import { storage } from '../../firebase'
 
 const Form = ({ currentId, setCurrentId }) => {
     const [postData, setPostData] = useState({
@@ -13,6 +13,8 @@ const Form = ({ currentId, setCurrentId }) => {
         tags: '',
         selectedFile: ''
     })
+    const [image, setImage] = useState(null)
+    const [submit, setSubmit] = useState(false)
     const post = useSelector(state => currentId ? state.posts.posts.find(p => p._id === currentId) : null)
     const dispatch = useDispatch()
     const history = useHistory()
@@ -23,15 +25,43 @@ const Form = ({ currentId, setCurrentId }) => {
         if(post) setPostData(post)
     },[post])
 
+    useEffect(() => {
+        if(postData.title && postData.message && postData.tags) {
+            if(currentId) {
+                dispatch(updatePost(currentId, {...postData, name: user?.result?.name }))
+            } else {
+                dispatch(createPost({...postData, name: user?.result?.name }, history))
+            }
+            clear()
+        }
+    }, [submit])
+
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        if(currentId) {
-            dispatch(updatePost(currentId, {...postData, name: user?.result?.name }))
+        if(image) {
+            const uploadTask = storage.ref(`images/${user?.result?._id}/${image.name}`).put(image)
+            uploadTask.on(
+                "state_changed", 
+                snapshot => {}, 
+                error => console.log(error),
+                async () => {
+                    const url = await storage.ref(`images/${user?.result?._id}`)
+                        .child(image.name)
+                        .getDownloadURL()
+                    setPostData({ ...postData, selectedFile: url })
+                    setSubmit(true)
+                }
+            )
         } else {
-            dispatch(createPost({...postData, name: user?.result?.name }, history))
+            setSubmit(true)
         }
-        clear()
+    }
+
+    const handleChange = (e) => {
+        if(e.target.files[0]) {
+            setImage(e.target.files[0])
+        }
     }
 
     const clear = () => {
@@ -83,11 +113,7 @@ const Form = ({ currentId, setCurrentId }) => {
                     onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(',')})} 
                 />
                 <div className={classes.fileInput}>
-                    <FileBase 
-                        type="file"
-                        multiple={false}
-                        onDone={({base64}) => setPostData({ ...postData, selectedFile: base64 })}
-                    />
+                    <input type="file" onChange={handleChange} />
                 </div>
                 <Button 
                     className={classes.buttonSubmit} 
