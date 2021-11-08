@@ -16,13 +16,13 @@ const PostDetails = () => {
 
     useEffect(() => {
         dispatch(getPost(id))
-    }, [id])
+    }, [id, dispatch])
 
     useEffect(() => {
         if(post) {
             dispatch(getPostsBySearch({ search: 'none', tags: post?.tags.join(',') }))
         }
-    }, [post])
+    }, [post, dispatch])
 
     if(!post) return null;
 
@@ -66,7 +66,7 @@ const PostDetails = () => {
                                 <Typography style={{ fontWeight: 'bold' }} gutterBottom variant="subtitle2">{name}</Typography>
                                 <Typography className={classes.recommendedPostMessage} gutterBottom variant="subtitle2">{message}</Typography>
                                 <Typography gutterBottom variant="subtitle1">Likes: {likes.length}</Typography>
-                                <img className={classes.recommendedPostImage} src={selectedFile} width="200px"/>
+                                <img className={classes.recommendedPostImage} src={selectedFile} width="200px" alt={title} />
                             </div>
                         ))}
                     </div>

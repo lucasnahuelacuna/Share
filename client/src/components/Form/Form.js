@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import useStyles from './styles'
-import { TextField, Button, Typography, Paper, ImageList } from '@material-ui/core'
+import { TextField, Button, Typography, Paper } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
 import { createPost, updatePost } from '../../actions/posts'
 import { useHistory } from 'react-router-dom'

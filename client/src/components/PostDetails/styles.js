@@ -42,9 +42,7 @@ export default makeStyles((theme) => ({
   },
   recommendedPosts: {
     display: 'flex',
-    [theme.breakpoints.down('sm')]: {
-      flexDirection: 'column',
-    },
+    overflowX: 'auto',
   },
   recommendedPost: {
     margin: '20px',
@@ -55,7 +53,7 @@ export default makeStyles((theme) => ({
     borderRadius: '10px',
     [theme.breakpoints.down('xs')]: {
       width: '100%',
-      margin: '5px auto',
+      margin: '5px 5px',
       boxSizing: 'border-box'
     },
   },
